@@ -1,7 +1,12 @@
 export const DEFAULT_AVATAR =
   "https://icons.veryicon.com/png/o/miscellaneous/rookie-official-icon-gallery/225-default-avatar.png";
 
-export const BASE_URL = "http://localhost:8090";
+const origin = true;
+export const BASE_URL = origin
+  ? "https://the-digital-dinner-server.onrender.com"
+  : "http://localhost:8090";
+
+  
 export const HOME_IMG_URL =
   "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/";
 
@@ -14,11 +19,11 @@ export const SUGGESTIONS_DATA =
 export const SUGGESTIONS_IMG_URL =
   "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_112,h_112,c_fill/";
 
-  export const CUISINES_IMG_URL =
+export const CUISINES_IMG_URL =
   "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/";
 
-  export const SEARCH_IMG_URL =
+export const SEARCH_IMG_URL =
   "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_264,h_288,c_fill/";
 
-  export const SEARCH_DISH_IMG_URL =
+export const SEARCH_DISH_IMG_URL =
   "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_208,h_208,c_fit/";
