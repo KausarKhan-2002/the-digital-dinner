@@ -1,20 +1,17 @@
 import React, { useEffect, useState } from "react";
 import SuggestionCards from "./SuggestionCards";
-import { SUGGESTIONS_DATA, SUGGESTIONS_IMG_URL } from "../../Utils/constants";
+import { SUGGESTIONS_IMG_URL } from "../../Utils/constants";
+import { useSuggestions } from "../../Hooks/useSuggestions";
 
 const Suggestions = ({ text }) => {
   const [data, setData] = useState([]);
   const [suggestionCardId, setSuggestionCardId] = useState(false);
 
-  const fetchSuggestionsData = async () => {
-    const data = await fetch(SUGGESTIONS_DATA + text);
-    const response = await data.json();
-    // console.log(response.data.suggestions);
-    setData(response.data.suggestions);
-  };
+  const suggestions = useSuggestions()
 
   useEffect(() => {
-    fetchSuggestionsData();
+    // fetchSuggestionsData();
+    suggestions(setData, text)
   }, []);
 
   if (data.length == 0) return "Loading..";

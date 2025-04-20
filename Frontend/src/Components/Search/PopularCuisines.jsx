@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { CUISINES_IMG_URL } from "../../Utils/constants";
+import { useCuisines } from "../../Hooks/useCuisines";
 
 const PopularCuisines = ({ setText }) => {
   const [data, setData] = useState([]);
@@ -19,16 +20,10 @@ const PopularCuisines = ({ setText }) => {
     setText(title);
   };
 
-  const fetchCuisines = async () => {
-    const data = await fetch(
-      `https://www.swiggy.com/dapi/landing/PRE_SEARCH?lat=28.7040592&lng=77.10249019999999`
-    );
-    const response = await data.json();
-    setData(response.data.cards[1].card.card);
-  };
+  const popularCuisines = useCuisines()
 
   useEffect(() => {
-    fetchCuisines();
+    popularCuisines(setData)
   }, []);
 
   if (data.length == 0) return "Loading";

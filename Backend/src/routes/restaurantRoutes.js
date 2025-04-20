@@ -7,6 +7,12 @@ const HOME_URL =
 const MENU_URL =
   "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=28.7040592&lng=77.10249019999999&restaurantId=";
 
+const CUISINES =
+  "https://www.swiggy.com/dapi/landing/PRE_SEARCH?lat=28.7040592&lng=77.10249019999999";
+
+const SUGGESTION_RESTAURANTS =
+  "https://www.swiggy.com/dapi/restaurants/search/suggest?lat=28.7040592&lng=77.10249019999999&str=";
+
 // Proxy Swiggy data
 router.get("/restaurants", (req, res) => {
   const byPassAPI = bypassConnectionAPI(req, res);
@@ -45,6 +51,26 @@ router.get("/top-collections/:resId/:resTitle", (req, res) => {
   } catch (err) {
     console.log(err.message);
   }
+});
+
+router.get("/cuisines", (req, res) => {
+  const byPassAPI = bypassConnectionAPI(req, res);
+  byPassAPI(CUISINES);
+});
+
+router.get("/suggestions/:text", (req, res) => {
+  const { text } = req.params;
+
+  const byPassAPI = bypassConnectionAPI(req, res);
+  byPassAPI(SUGGESTION_RESTAURANTS + text);
+});
+
+router.get("/suggestion-cards/:cardId", (req, res) => {
+  const { cardId } = req.params;
+
+  const SUGGESTION_CARDS = `https://www.swiggy.com/dapi/restaurants/search/v3?lat=28.7040592&lng=77.10249019999999&str=${cardId}&trackingId=841a3d45-4b06-c77c-6894-70e93d407ba8&submitAction=ENTER&queryUniqueId=58e3502b-92af-d7ad-12f1-3f24c158fca7`;
+  const byPassAPI = bypassConnectionAPI(req, res);
+  byPassAPI(SUGGESTION_CARDS);
 });
 
 module.exports = { restaurants: router };

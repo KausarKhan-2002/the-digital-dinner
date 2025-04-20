@@ -11,8 +11,8 @@ const Search = () => {
   const [text, setText] = useState("");
   
   return (
-    <div className="bg-white">
-      <div className="w-[60%] fixed top-[70px] left-[20%] pt-[37px] bg-white z-10">
+    <div className="bg-white border">
+      <div className="w-[60%] fixed top-[63px] left-[20%] pt-[37px] bg-white z-10">
         <div
           id="search"
           className="flex justify-between items-center border-[1.6px] border-slate-300 rounded-md px-2"

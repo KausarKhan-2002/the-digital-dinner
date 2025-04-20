@@ -6,15 +6,12 @@ export const BASE_URL = origin
   ? "https://the-digital-dinner-server.onrender.com"
   : "http://localhost:8090";
 
-  
+
 export const HOME_IMG_URL =
   "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/";
 
 export const RESTAURANT_MENU =
   "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=28.7040592&lng=77.10249019999999&restaurantId=";
-
-export const SUGGESTIONS_DATA =
-  "https://www.swiggy.com/dapi/restaurants/search/suggest?lat=28.7040592&lng=77.10249019999999&str=";
 
 export const SUGGESTIONS_IMG_URL =
   "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_112,h_112,c_fill/";
