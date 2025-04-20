@@ -41,24 +41,28 @@ function MobileNavbar({ showMobileNavbar, setShowMobileNavbar }) {
 
         <nav className="flex flex-col gap-2 text-lg px-6">
           <Link
+            to="/"
             onClick={() => setShowMobileNavbar(false)}
             className="py-2 font-medium hover:text-orange-400 flex items-center"
           >
             <IoHomeOutline className="mr-3 text-xl" /> Home
           </Link>
           <Link
+            to="/search"
             onClick={() => setShowMobileNavbar(false)}
             className="py-2 font-medium hover:text-orange-400 flex items-center"
           >
             <IoSearchOutline className="mr-3 text-xl" /> Search
           </Link>
           <Link
+            to="/cart"
             onClick={() => setShowMobileNavbar(false)}
             className="py-2 font-medium hover:text-orange-400 flex items-center"
           >
             <IoCartOutline className="mr-3 text-xl" /> Cart
           </Link>
           <Link
+            to="/auth"
             onClick={() => setShowMobileNavbar(false)}
             className="py-2 font-medium hover:text-orange-400 flex items-center"
           >

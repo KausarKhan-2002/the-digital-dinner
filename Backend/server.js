@@ -4,12 +4,21 @@ const cookieParser = require("cookie-parser");
 const { userRoute } = require("./src/routes/userRoute");
 const mongoose = require("mongoose");
 const { restaurants } = require("./src/routes/restaurantRoutes");
+const { profileRoute } = require("./src/routes/profileRoute");
 
 const MONGODB_URI = process.env.MONGODB_URI;
 const PORT = process.env.PORT;
 
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "https://the-digital-client-server.onrender.com",
+      "http://localhost:5173",
+    ],
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(cookieParser());
 
@@ -37,3 +46,4 @@ app.get("/", (req, res) => res.json({ message: "done" }));
 // My Routes
 app.use("/auth", userRoute);
 app.use("/api", restaurants);
+app.use("/profile", profileRoute);

@@ -7,7 +7,6 @@ import RestaurantCard from "../Shared/RestaurantCard";
 function Home() {
   const [resData, setResData] = useState([]);
   const homeRestaurant = useHomeRestaurant();
-  console.log(resData);
 
   const resCard =
     resData[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
