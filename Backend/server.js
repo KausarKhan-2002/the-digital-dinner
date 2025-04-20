@@ -1,18 +1,17 @@
 const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-const {userRoute} = require("./src/routes/userRoute");
+const { userRoute } = require("./src/routes/userRoute");
 const mongoose = require("mongoose");
+const { restaurants } = require("./src/routes/homeRoutes");
 
 const MONGODB_URI = process.env.MONGODB_URI;
 const PORT = process.env.PORT;
 
-
 const app = express();
 app.use(cors());
-app.use(express.json())
-app.use(cookieParser())
-
+app.use(express.json());
+app.use(cookieParser());
 
 const connectionDB = async () => {
   try {
@@ -23,15 +22,18 @@ const connectionDB = async () => {
 
     await mongoose.connect(MONGODB_URI);
     console.log("DB is connected ✔️");
-    app.listen(PORT, () => console.log(`Server is listening on ${PORT} port...`));
+    app.listen(PORT, () =>
+      console.log(`Server is listening on ${PORT} port...`)
+    );
   } catch (err) {
     console.log(err.message);
   }
 };
 
-connectionDB()
+connectionDB();
 
-app.get("/", (req, res) => res.json({message: "done"}))
+app.get("/", (req, res) => res.json({ message: "done" }));
 
 // My Routes
-app.use("/auth", userRoute)
+app.use("/auth", userRoute);
+app.use("/home", restaurants);

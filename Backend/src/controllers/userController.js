@@ -123,12 +123,13 @@ exports.login = async (req, res) => {
 
 exports.logout = async (req, res) => {
   try {
-    // Clear the JWT cookie by setting it to an empty value and expiring it immediately
+    // 1. Clear the JWT cookie by setting it to an empty value and expiring it immediately
     res.cookie("jwt_token", "", {
       httpOnly: true,
       expires: new Date(0), // Set to past time
     });
 
+    // 2.Send message
     res.status(200).json({
       success: true,
       message: "You have been logged out successfully.",
