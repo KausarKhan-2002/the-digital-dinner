@@ -13,7 +13,7 @@ const app = express();
 app.use(
   cors({
     origin: [
-      "https://the-digital-dinner.onrender.com/",
+      "https://the-digital-dinner.onrender.com",
       "http://localhost:5173",
     ],
     credentials: true,
