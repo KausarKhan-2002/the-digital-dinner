@@ -6,9 +6,8 @@ import MobileNavbar from "./MobileNavbar";
 function Header() {
   const [showMobileNavbar, setShowMobileNavbar] = useState(false);
   return (
-    <header className="fixed w-full flex justify-between items-center px-10 sm:px-14 shadow-lg">
-
-    {/* Logo */}
+    <header className="fixed w-full bg-white z-999 flex justify-between items-center px-10 sm:px-14 shadow-lg">
+      {/* Logo */}
       <div className="py-4">
         <span className="text-sm font-bold font-mono">The</span>
         <span className="text-orange-500 font-bold text-xl sm:text-2xl">
@@ -27,9 +26,12 @@ function Header() {
 
       {/* Desktop navbar */}
       <DesktopNavbar />
-      
+
       {/* Mobile navbar */}
-      <MobileNavbar showMobileNavbar={showMobileNavbar} setShowMobileNavbar={setShowMobileNavbar} />
+      <MobileNavbar
+        showMobileNavbar={showMobileNavbar}
+        setShowMobileNavbar={setShowMobileNavbar}
+      />
     </header>
   );
 }

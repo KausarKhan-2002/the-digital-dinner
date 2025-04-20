@@ -34,12 +34,12 @@ function RestaurantTopCarousel({ data, dataSettings, isCategories }) {
   return (
     <section
       id="chooseRestaurantData"
-      className="w-[90%] mx-auto my-2 dark:bg-zinc-900 p-4 rounded-xl"
+      className="my-2 dark:bg-zinc-900 p-4 rounded-xl"
     >
       <div className="flex justify-between items-center">
         <h2 className="text-2xl font-bold text-slate-800">
           {isCategories ? "TOP BEST CATEGORIES FOR YOU" : "TOP RESTAURANTS"}
-          <div className="w-[60%] h-[2px] bg-slate-600 mt-2" />
+          <div className="w-[60%] h-[2px] bg-slate-600 my-2" />
         </h2>
         <div className="flex gap-3">
           <button

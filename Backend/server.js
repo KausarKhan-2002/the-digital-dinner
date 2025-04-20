@@ -3,7 +3,7 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const { userRoute } = require("./src/routes/userRoute");
 const mongoose = require("mongoose");
-const { restaurants } = require("./src/routes/homeRoutes");
+const { restaurants } = require("./src/routes/restaurantRoutes");
 
 const MONGODB_URI = process.env.MONGODB_URI;
 const PORT = process.env.PORT;
@@ -36,4 +36,4 @@ app.get("/", (req, res) => res.json({ message: "done" }));
 
 // My Routes
 app.use("/auth", userRoute);
-app.use("/home", restaurants);
+app.use("/api", restaurants);
