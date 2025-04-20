@@ -73,3 +73,67 @@ exports.signup = async (req, res) => {
     catchError(err, res);
   }
 };
+
+exports.login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    // 1. Validate input
+    if (!email || !validator.isEmail(email)) {
+      throw new Error("Please provide a valid email address");
+    }
+
+    if (!password) {
+      throw new Error("Password is required");
+    }
+
+    // 2. Find user based on email
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      throw new Error("Invalid email address");
+    }
+
+    // 2. Compare password
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      throw new Error("Incorrect password. Please try again.");
+    }
+
+    // 3. Create token and save cookie
+    createTokenSaveCookie(user._id, res);
+
+    const loginUser = {
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      _id: user._id,
+    };
+
+    // 4. Send success response
+    res.status(200).json({
+      success: true,
+      message: "You are logged in successfully",
+      user: loginUser,
+    });
+  } catch (err) {
+    catchError(err, res);
+  }
+};
+
+exports.logout = async (req, res) => {
+  try {
+    // Clear the JWT cookie by setting it to an empty value and expiring it immediately
+    res.cookie("jwt_token", "", {
+      httpOnly: true,
+      expires: new Date(0), // Set to past time
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "You have been logged out successfully.",
+    });
+  } catch (err) {
+    catchError(err, res);
+  }
+};
