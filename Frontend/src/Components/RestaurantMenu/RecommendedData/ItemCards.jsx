@@ -4,8 +4,9 @@ import React from "react";
 import { BsTriangleFill } from "react-icons/bs";
 import { FaCircle } from "react-icons/fa6";
 
-const ItemCards = ({ item }) => {
+const ItemCards = ({ item, brandInfo, handleCart }) => {
   const {
+    id,
     name,
     price,
     ratings,
@@ -32,7 +33,9 @@ const ItemCards = ({ item }) => {
           )}
         </div>
 
-        <h2 className="text-lg sm:text-xl font-bold text-gray-800 mb-1">{name}</h2>
+        <h2 className="text-lg sm:text-xl font-bold text-gray-800 mb-1">
+          {name}
+        </h2>
         <p className="text-base font-semibold text-gray-700 mb-1">
           ₹{price / 100 || defaultPrice / 100}
         </p>
@@ -71,7 +74,24 @@ const ItemCards = ({ item }) => {
           />
         )}
 
-        <button className="absolute bottom-[-14px] left-1/2 -translate-x-1/2 bg-white  text-green-700 font-bold text-sm py-2 px-6 rounded-md shadow transition-all duration-200">
+        <button
+          onClick={() =>
+            handleCart({
+              id,
+              image: HOME_IMG_URL + imageId,
+              brand: brandInfo,
+              quantity: 1,
+              name,
+              price,
+              ratings,
+              description,
+              defaultPrice,
+              isVeg,
+              isBestseller,
+            })
+          }
+          className="absolute bottom-[-14px] left-1/2 -translate-x-1/2 bg-white  text-green-700 font-bold text-sm py-2 px-6 rounded-md shadow transition-all duration-200"
+        >
           ADD
         </button>
 

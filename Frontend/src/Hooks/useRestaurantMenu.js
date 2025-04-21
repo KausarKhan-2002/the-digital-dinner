@@ -10,7 +10,7 @@ export const useRestaurantMenu = () => {
       const response = await axios.get(
         BASE_URL + "/api/restaurant-menu/" + params.id
       );
-      //   console.log(response)
+        // console.log(response)
       setMenuInfo(response.data.restaurants.data.cards);
     } catch (err) {
       console.log(err.message);

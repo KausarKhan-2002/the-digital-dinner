@@ -10,7 +10,7 @@ import MenuShimmerUI from "../ShimmerUI/MenuShimmerUI";
 const RestaurantMenu = () => {
   const [menuInfo, setMenuInfo] = useState([]);
   const restaurantMenuData = useRestaurantMenu();
-  console.log(menuInfo);
+  // console.log(menuInfo);
 
   useEffect(() => {
     restaurantMenuData(setMenuInfo);

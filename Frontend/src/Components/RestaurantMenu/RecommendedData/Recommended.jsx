@@ -11,13 +11,12 @@ const Recommended = ({ recommendInfo, brandInfo }) => {
       ),
     [recommendInfo]
   );
-  
 
   return (
     <div className="flex flex-col gap-5">
       {filteredInfo().map((items) => (
         <RecommendedCards
-        brandInfo={brandInfo}
+          brandInfo={brandInfo}
           key={items.card.card.title}
           recomState={{ hiddenData, setHiddenData }}
           items={items.card.card}

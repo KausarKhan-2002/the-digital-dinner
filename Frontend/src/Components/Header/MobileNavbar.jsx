@@ -10,8 +10,6 @@ import { Link, useLocation } from "react-router-dom";
 
 function MobileNavbar({ showMobileNavbar, setShowMobileNavbar }) {
   const {pathname} = useLocation()
-  console.log(pathname);
-  
   
   return (
     <section
