@@ -2,11 +2,11 @@
 <p align="center"><strong>A Swiggy-like food delivery app built with the MERN stack</strong></p>
 
 <p align="center">
-  <img src="https://your-image-link.com/landing-page.png" alt="theDigitalDinner Landing Page" style="width:80%; border-radius: 12px;" />
+  <img src="./Assets/landing_page.png" alt="theDigitalDinner Landing Page" style="width:80%; border-radius: 12px;" />
 </p>
 
 <p align="center">
-  <a href="https://the-digital-dinner.onrender.com" target="_blank" style="text-decoration: none; background-color: #ff4500; color: white; padding: 10px 20px; border-radius: 8px; font-weight: bold;">
+  <a href="https://the-digital-dinner.onrender.com/" target="_blank" style="text-decoration: none; background-color: #ff4500; color: white; padding: 10px 20px; border-radius: 8px; font-weight: bold;">
     🚀 Live Demo
   </a>
 </p>
