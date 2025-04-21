@@ -6,9 +6,13 @@ import {
 } from "react-icons/io5"; // Importing icons
 import { IoMdClose } from "react-icons/io";
 import { DEFAULT_AVATAR } from "../../Utils/constants";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 function MobileNavbar({ showMobileNavbar, setShowMobileNavbar }) {
+  const {pathname} = useLocation()
+  console.log(pathname);
+  
+  
   return (
     <section
       id="mobileNavbar"
@@ -22,14 +26,14 @@ function MobileNavbar({ showMobileNavbar, setShowMobileNavbar }) {
       }`}
     >
       <div
-        className={`fixed top-0 right-0 w-[250px] h-full bg-slate-800 z-[999999] text-white transition-transform duration-300 ease-in-out shadow-lg ${
+        className={`fixed top-0 right-0 w-[250px] h-full bg-slate-100/70 backdrop-blur-md  z-[999999] transition-transform duration-300 ease-in-out shadow-lg ${
           showMobileNavbar ? "translate-x-0" : "translate-x-full"
         }`}
       >
         <button className="flex justify-end mt-4 mr-4">
           <IoMdClose
             onClick={() => setShowMobileNavbar(false)}
-            className="text-3xl text-slate-400 hover:text-white cursor-pointer"
+            className="text-3xl ml-1"
           />
         </button>
 
@@ -39,32 +43,32 @@ function MobileNavbar({ showMobileNavbar, setShowMobileNavbar }) {
           className="w-24 h-24 rounded-full mx-auto my-6 border-4 border-slate-700"
         />
 
-        <nav className="flex flex-col gap-2 text-lg px-6">
+        <nav className="flex flex-col gap-2 px-6">
           <Link
             to="/"
             onClick={() => setShowMobileNavbar(false)}
-            className="py-2 font-medium hover:text-orange-400 flex items-center"
+            className={`py-2 font-medium flex items-center ${pathname === "/" && "text-orange-700"}`}
           >
             <IoHomeOutline className="mr-3 text-xl" /> Home
           </Link>
           <Link
             to="/search"
             onClick={() => setShowMobileNavbar(false)}
-            className="py-2 font-medium hover:text-orange-400 flex items-center"
+            className={`py-2 font-medium flex items-center ${pathname === "/search" && "text-orange-700"}`}
           >
             <IoSearchOutline className="mr-3 text-xl" /> Search
           </Link>
           <Link
             to="/cart"
             onClick={() => setShowMobileNavbar(false)}
-            className="py-2 font-medium hover:text-orange-400 flex items-center"
+            className={`py-2 font-medium flex items-center ${pathname === "/cart" && "text-orange-700"}`}
           >
             <IoCartOutline className="mr-3 text-xl" /> Cart
           </Link>
           <Link
             to="/auth"
             onClick={() => setShowMobileNavbar(false)}
-            className="py-2 font-medium hover:text-orange-400 flex items-center"
+            className={`py-2 font-medium flex items-center ${pathname === "/auth" && "text-orange-700"}`}
           >
             <IoLogInOutline className="mr-3 text-xl" /> Sign In
           </Link>

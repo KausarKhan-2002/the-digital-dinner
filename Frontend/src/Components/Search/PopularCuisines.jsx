@@ -2,11 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { CUISINES_IMG_URL } from "../../Utils/constants";
 import { useCuisines } from "../../Hooks/useCuisines";
+import CuisinesShimmerUI from "../ShimmerUI/CuisinesShimmerUI";
 
 const PopularCuisines = ({ setText }) => {
-  const [data, setData] = useState([]);
-  console.log("Popular");
-  
+  const [data, setData] = useState([]);  
 
   const injectId = (entityId) => {
     let arr = entityId.split("").slice(23);
@@ -26,12 +25,12 @@ const PopularCuisines = ({ setText }) => {
     popularCuisines(setData)
   }, []);
 
-  if (data.length == 0) return "Loading";
+  if (data.length == 0) return <CuisinesShimmerUI />;
 
 //   console.log(data.gridElements.infoWithStyle.info);
 
   return (
-    <div className="px-4 mt-5">
+    <div className="mt-5">
       <h2 className="text-lg text-slate-700 font-extrabold">
         {data.header.title}
       </h2>

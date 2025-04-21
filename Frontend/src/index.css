@@ -15,3 +15,8 @@
   position: relative !important;
 }
 
+
+/* Hide scrollbar without reomving it's functionality */
+.cuisines::-webkit-scrollbar {
+  display: none;
+}

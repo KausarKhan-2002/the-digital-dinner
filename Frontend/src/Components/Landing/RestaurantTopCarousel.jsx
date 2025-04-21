@@ -16,19 +16,28 @@ function RestaurantTopCarousel({ data, dataSettings, isCategories }) {
     data?.gridElements?.infoWithStyle?.restaurants?.length ||
     0;
 
-  const slidesToShow = dataSettings.slideToShow || 4;
+  const defaultSlidesToShow = dataSettings?.slideToShow || 4;
 
   const isFirstSlide = currentSlide === 0;
-  const isLastSlide = currentSlide >= itemsLength - slidesToShow;
+  const isLastSlide = currentSlide >= itemsLength - defaultSlidesToShow;
 
   const settings = {
-    dots: false,
-    infinite: false,
+    dots: dataSettings?.dots || false,
+    infinite: dataSettings?.infinite || false,
     speed: 500,
-    slidesToShow,
+    slidesToShow: defaultSlidesToShow,
     arrows: false,
     slidesToScroll: 1,
     afterChange: (index) => setCurrentSlide(index),
+    responsive:
+      dataSettings?.responsive?.map((bp) => ({
+        breakpoint: bp.breakpoint,
+        settings: {
+          slidesToShow: bp.settings.slideToShow,
+          slidesToScroll: 1,
+          dots: bp.settings.dots
+        },
+      })) || [],
   };
 
   return (
@@ -37,7 +46,7 @@ function RestaurantTopCarousel({ data, dataSettings, isCategories }) {
       className="my-2 dark:bg-zinc-900 p-4 rounded-xl"
     >
       <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold text-slate-800">
+        <h2 className="text-base md:text-lg lg:text-xl xl:text-2xl font-bold text-slate-800">
           {isCategories ? "TOP BEST CATEGORIES FOR YOU" : "TOP RESTAURANTS"}
           <div className="w-[60%] h-[2px] bg-slate-600 my-2" />
         </h2>

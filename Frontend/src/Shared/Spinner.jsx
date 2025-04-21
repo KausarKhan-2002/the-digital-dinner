@@ -1,12 +1,12 @@
-import React from 'react'
+import React from 'react';
 import { ImSpinner9 } from "react-icons/im";
 
-const Spinner = () => {
+const Spinner = ({ icon: Icon = ImSpinner9, activity = "animate-spin", size = "lg" }) => {
   return (
-    <div className="text-gray-200 animate-spin text-lg">
-      <ImSpinner9 />
+    <div className={`text-gray-200 ${activity} ${size ? size : "text-lg"}`}>
+      <Icon />
     </div>
-  )
-}
+  );
+};
 
-export default Spinner
+export default Spinner;

@@ -22,7 +22,7 @@ const RecommendedItemCards = ({ items, state, brandInfo }) => {
         onClick={handletoggle}
         className="flex justify-between items-center font-bold text-lg my-5 pl-2 pr-7 cursor-pointer"
       >
-        <h2>
+        <h2 className="mt-4">
           {items.title} ({items?.itemCards?.length})
         </h2>
         <h2>
@@ -31,7 +31,7 @@ const RecommendedItemCards = ({ items, state, brandInfo }) => {
       </div>
 
       <div
-        className={`${state.hiddenData == items.title ? "hidden" : "block"}`}
+        className={`grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-3 gap-4 overflow-hidden ${state.hiddenData == items.title ? "hidden" : "grid"}`}
       >
         {items.itemCards.map((item, ind) => (
           <ItemCards

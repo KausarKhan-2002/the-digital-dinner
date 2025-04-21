@@ -3,6 +3,7 @@ import SuggestionResCards from "./SuggestionResCards";
 import { useState } from "react";
 import SuggestionDishCards from "./SuggestionDishCards";
 import { useSuggestionCards } from "../../Hooks/useSuggestionCards";
+import SuggestionCardsShimmerUI from "../ShimmerUI/SuggestionCardsShimmerUI"
 
 const SuggestionCards = ({ cardId }) => {
   const [data, setData] = useState([]);
@@ -13,28 +14,19 @@ const SuggestionCards = ({ cardId }) => {
     suggestionCards(setData, cardId)
   }, []);
 
-  if (data.length == 0) return "Loading...";
+  if (data.length == 0) return <SuggestionCardsShimmerUI />
 
   const restaurant = data[1].groupedCard.cardGroupMap.RESTAURANT;
   const dish = data[1].groupedCard.cardGroupMap.DISH;
 
   return (
-    <div>
-      <div className="fixed w-[60%] top-[151px] pt-4 pb-7 bg-white z-10">
+    <div className="">
+      <div className="fixed w-[100%] top-[143px] pt-4 pb-7 bg-white z-10">
         <div className="flex gap-5">
           <button
-            className={`border border-slate-300 ${
-              restaurant && "bg-slate-800 text-slate-100 border-transparent"
-            } rounded-full font-bold px-5 py-1`}
+            className={`bg-slate-800 text-slate-100 border-transparent rounded-full font-bold px-5 py-1`}
           >
-            Restaurants
-          </button>
-          <button
-            className={`border border-slate-300 ${
-              dish && "bg-slate-800 text-slate-100 border-transparent"
-            } rounded-full font-bold px-5 py-1`}
-          >
-            Dishes
+            {restaurant ? "Restaurants" : "Dishes"}
           </button>
         </div>
       </div>

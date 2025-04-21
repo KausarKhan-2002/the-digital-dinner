@@ -6,7 +6,7 @@ import MobileNavbar from "./MobileNavbar";
 function Header() {
   const [showMobileNavbar, setShowMobileNavbar] = useState(false);
   return (
-    <header className="fixed w-full bg-white z-999 flex justify-between items-center px-10 sm:px-14 shadow-lg">
+    <header className="fixed w-full bg-white z-999 flex justify-between items-center px-14 md:px-17 lg:px-25 xl:px-32 shadow-lg">
       {/* Logo */}
       <div className="py-4">
         <span className="text-sm font-bold font-mono">The</span>

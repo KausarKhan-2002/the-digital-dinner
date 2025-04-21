@@ -5,6 +5,7 @@ import MenuLink from "./MenuInfo/MenuLink";
 import MenuDetails from "./MenuInfo/MenuDetails";
 import MenuDeals from "./MenuInfo/MenuDeals";
 import Recommended from "./RecommendedData/Recommended";
+import MenuShimmerUI from "../ShimmerUI/MenuShimmerUI";
 
 const RestaurantMenu = () => {
   const [menuInfo, setMenuInfo] = useState([]);
@@ -15,14 +16,12 @@ const RestaurantMenu = () => {
     restaurantMenuData(setMenuInfo);
   }, []);
 
-  if (menuInfo.length === 0) {
-    return "loading";
-  }
+  if (menuInfo.length === 0) return <MenuShimmerUI />
 
   // console.log(menuInfo.cards[2]?.card?.card?.info.cloudinaryImageId);
 
   return (
-    <section className="w-[70%] mx-auto">
+    <section className="mx-auto px-5">
       {/* Menu header */}
       <div className="flex justify-between items-center py-4 border-b-2">
         <h3 className="text-lg font-medium">

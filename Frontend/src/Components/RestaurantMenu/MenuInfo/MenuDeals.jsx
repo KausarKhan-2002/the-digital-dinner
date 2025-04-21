@@ -44,7 +44,7 @@ const MenuDeals = ({ menu }) => {
     infinite: false,
     speed: 500,
     slidesToShow: 2.5,
-    slidesToScroll: 2,
+    slidesToScroll: 1,
     nextArrow: <CustomArrow />,
     prevArrow: <CustomArrow />,
   };

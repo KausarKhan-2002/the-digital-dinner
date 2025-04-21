@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import SuggestionCards from "./SuggestionCards";
 import { SUGGESTIONS_IMG_URL } from "../../Utils/constants";
 import { useSuggestions } from "../../Hooks/useSuggestions";
+import SuggestionShimmerUI from "../ShimmerUI/SuggestionShimmerUI";
 
 const Suggestions = ({ text }) => {
   const [data, setData] = useState([]);
@@ -14,14 +15,12 @@ const Suggestions = ({ text }) => {
     suggestions(setData, text)
   }, []);
 
-  if (data.length == 0) return "Loading..";
-
-  //   console.log(data);
+  if (data.length == 0) return <SuggestionShimmerUI />;
 
   return (
-    <div>
+    <div className="">
       <div
-        className={`flex flex-col gap-4 mt-5 px-5 ${
+        className={`flex flex-col gap-4 mt-5 ${
           suggestionCardId && "hidden"
         }`}
       >

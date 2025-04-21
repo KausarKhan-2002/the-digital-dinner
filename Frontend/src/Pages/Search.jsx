@@ -12,7 +12,7 @@ const Search = () => {
   
   return (
     <div className="bg-white">
-      <div className="w-[60%] fixed top-[63px] left-[20%] pt-[37px] bg-white z-10">
+      <div className="w-[85%] left-[7%] md:w-[70%] md:left-[15%] lg:w-[65%] lg:left-[18%] fixed top-[55px] pt-[37px] bg-white z-10">
         <div
           id="search"
           className="flex justify-between items-center border-[1.6px] border-slate-300 rounded-md px-2"
@@ -35,7 +35,7 @@ const Search = () => {
         </div>
       </div>
 
-      <div className="pt-20 mx-auto px-40 mt-5">
+      <div className="pt-17 mx-auto sm:px-15 md:px-20 lg:px-30 xl:px-40 mt-5">
         {/* Popular cuisines */}
         {text.length == 0 && <PopularCuisines setText={setText} />}
 

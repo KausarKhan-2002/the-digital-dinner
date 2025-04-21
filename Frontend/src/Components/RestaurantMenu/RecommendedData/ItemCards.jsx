@@ -17,9 +17,9 @@ const ItemCards = ({ item }) => {
   } = item?.card?.info;
 
   return (
-    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 border-b border-gray-200 pb-10 pt-6">
-      <div className="flex-1">
-        <div className="flex items-center gap-2 mb-1">
+    <div className="flex flex-col-reverse xl:flex-row justify-between items-start sm:items-center shadow-sm overflow-hidden xl:px-1 gap-6 border-b border-gray-200 pb-10 pt-6">
+      <div className="flex-1 md:w-[60%]">
+        <div className="flex items-center gap-2 mb-1 mt-3">
           {isVeg ? (
             <BsTriangleFill className="text-red-500 border-2 border-red-500 p-[2px] rounded-sm text-xs" />
           ) : (
@@ -62,16 +62,16 @@ const ItemCards = ({ item }) => {
         )}
       </div>
 
-      <div className="relative w-full sm:w-[160px]">
+      <div className="relative w-full xl:w-[160px]">
         {imageId && (
           <img
             src={`${HOME_IMG_URL}${imageId}`}
             alt={name}
-            className="w-full h-32 object-cover rounded-lg shadow-md"
+            className="w-full h-36 object-cover rounded-lg shadow-md"
           />
         )}
 
-        <button className="absolute bottom-[-14px] left-1/2 -translate-x-1/2 bg-green-600 hover:bg-green-700 text-white font-bold text-sm py-2 px-6 rounded-md shadow transition-all duration-200">
+        <button className="absolute bottom-[-14px] left-1/2 -translate-x-1/2 bg-white  text-green-700 font-bold text-sm py-2 px-6 rounded-md shadow transition-all duration-200">
           ADD
         </button>
 

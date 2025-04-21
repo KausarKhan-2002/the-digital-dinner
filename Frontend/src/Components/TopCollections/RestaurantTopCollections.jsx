@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { useCollections } from '../../Hooks/useCollections'
-import RestaurantCard from '../../Shared/RestaurantCard';
 import { Link } from 'react-router-dom';
+import RestaurantCard from '../Landing/RestaurantCard';
+import CollectionShimmerUI from '../ShimmerUI/CollectionShimmerUI';
 
 function RestaurantTopCollections() {
     const [collection, setCollection] = useState([])
     const topcollections = useCollections()
-
-    console.log(collection);
     
     useEffect(() => {
         topcollections(setCollection)
     }, [])
 
-    if (collection.length === 0) return "loading"
+    if (collection.length === 0) return <CollectionShimmerUI />
 
     const filterCards = collection.filter((item) => item.card.card.info);
   // console.log(filterCards);

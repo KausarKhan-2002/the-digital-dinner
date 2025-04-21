@@ -1,4 +1,4 @@
-import { HOME_IMG_URL } from "../Utils/constants";
+import { HOME_IMG_URL } from "../../Utils/constants";
 import { MdOutlineStarPurple500 } from "react-icons/md";
 
 const RestaurantCard = ({ cardData }) => {

@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 import { SEARCH_DISH_IMG_URL } from "../../Utils/constants";
 
 const DishCards = ({ item }) => {
-  console.log(item.card.card);
 
   const { name: infoName, price } = item.card.card.info;
   const {
@@ -68,11 +67,10 @@ const DishCards = ({ item }) => {
 
 const SuggestionDishCards = ({ itemCards }) => {
   const cards = itemCards.cards.slice(1);
-  console.log(cards);
 
   return (
     <div>
-      <div className="grid grid-cols-2 gap-8">
+      <div className="grid lg:grid-cols-2 gap-8">
         {cards &&
           cards.map((item) => (
             <DishCards key={item.card.card.info.id} item={item} />

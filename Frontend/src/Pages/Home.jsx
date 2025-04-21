@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useHomeRestaurant } from "../Hooks/useHomeRestaurant";
 import RestaurantTopCarousel from "../Components/Landing/RestaurantTopCarousel";
 import { Link } from "react-router-dom";
-import RestaurantCard from "../Shared/RestaurantCard";
+import RestaurantCard from "../Components/Landing/RestaurantCard";
+import LandingShimmerUI from "../Components/ShimmerUI/LandingShimmerUI";
 
 function Home() {
   const [resData, setResData] = useState([]);
@@ -15,24 +16,78 @@ function Home() {
     homeRestaurant(setResData);
   }, []);
 
-  if (resData.length === 0) return "Loading";
+  if (resData.length === 0) return <LandingShimmerUI />;
 
-  let mindResSettings = {
+  const mindResSettings = {
     border: false,
     count: true,
     dots: false,
     infinite: false,
     slideToShow: 8,
     cardInfo: false,
+    responsive: [
+      {
+        breakpoint: 1280,
+        settings: {
+          slideToShow: 6,
+        },
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          slideToShow: 5,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slideToShow: 4,
+        },
+      },
+      {
+        breakpoint: 640,
+        settings: {
+          slideToShow: 3,
+          dots: false
+        },
+      },
+    ]
   };
 
-  let topResSettings = {
+  const topResSettings = {
     border: true,
     count: false,
     dots: true,
     infinite: true,
-    slideToShow: 4,
+    slideToShow: 6,
     cardInfo: true,
+    responsive: [
+      {
+        breakpoint: 1280,
+        settings: {
+          slideToShow: 5,
+        },
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          slideToShow: 4,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slideToShow: 3,
+        },
+      },
+      {
+        breakpoint: 640,
+        settings: {
+          slideToShow: 2,
+          dots: false
+        },
+      },
+    ],
   };
 
   return (
@@ -49,7 +104,7 @@ function Home() {
       />
 
       <div className="mt-10">
-        <h1 className="font-bold text-xl md:text-2xl">
+        <h1 className="font-bold text-base md:text-lg lg:text-xl xl:text-2xl">
           RESTAURANTS WITH ONLINE FOOD DELIVERY
           <div className="w-[30%] h-[2px] bg-slate-600 my-3" />
         </h1>
