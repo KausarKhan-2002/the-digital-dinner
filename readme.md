@@ -73,6 +73,4 @@ theDigitalDinner/
 │   └── ...
 ├── server/             # Express backend
 │   └── ...
-├── .env
-├── package.json
-└── README.md
+└── README.md           # Showcase Client & Server
