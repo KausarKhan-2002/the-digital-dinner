@@ -1,12 +1,13 @@
 import { FaAngleUp } from "react-icons/fa6";
 import ItemCards from "./ItemCards";
-import {useDispatch} from "react-redux"
+import { useDispatch, useSelector } from "react-redux";
 import { addItem } from "../../../Store/cartSlice";
+import { useAddCartItem } from "../../../Hooks/useAddCartItem";
 import toast from "react-hot-toast";
 
 const RecommendedItemCards = ({ items, state, brandInfo }) => {
-  // console.log(items);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const user = useSelector((store) => store.user);
 
   const handletoggle = () => {
     if (state?.hiddenData === items.title) {
@@ -18,12 +19,17 @@ const RecommendedItemCards = ({ items, state, brandInfo }) => {
     }
   };
 
+  const addCartItem = useAddCartItem();
   const handleCart = (item) => {
     // console.log(item);
-    
-    dispatch(addItem(item))
-    
-  }
+
+    if (user?._id) {
+      dispatch(addItem(item));
+      addCartItem(item);
+    } else {
+      toast.error("Please login");
+    }
+  };
 
   return (
     <div>

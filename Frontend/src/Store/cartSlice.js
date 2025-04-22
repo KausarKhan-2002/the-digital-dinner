@@ -7,9 +7,19 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
+
+    replaceItem: (state, action) => {
+      return action.payload
+    },
+
     // Add new item or increase quantity if already in cart
     addItem: (state, action) => {
       const item = action.payload;
+      if (!state) {
+        state = []
+        state.push(item)
+        return
+      }
       const cartItem = state.find((i) => i.id === item.id);
       if (cartItem) {
         toast.error(`Already in cart`);
@@ -49,7 +59,7 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addItem, removeItem, incrementQty, decrementQty, clearCart } =
+export const { replaceItem, addItem, removeItem, incrementQty, decrementQty, clearCart } =
   cartSlice.actions;
 
 export default cartSlice.reducer;

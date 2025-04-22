@@ -78,14 +78,16 @@ const ItemCards = ({ item, brandInfo, handleCart }) => {
           onClick={() =>
             handleCart({
               id,
-              image: HOME_IMG_URL + imageId,
+              imageId,
               brand: brandInfo,
               quantity: 1,
               name,
-              price,
-              ratings,
+              price: price || defaultPrice,
+              ratings: {
+                rating: ratings?.aggregatedRating?.rating,
+                ratingCount: ratings?.aggregatedRating?.ratingCountV2,
+              },
               description,
-              defaultPrice,
               isVeg,
               isBestseller,
             })

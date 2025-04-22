@@ -5,6 +5,7 @@ const { userRoute } = require("./src/routes/userRoute");
 const mongoose = require("mongoose");
 const { restaurants } = require("./src/routes/restaurantRoutes");
 const { profileRoute } = require("./src/routes/profileRoute");
+const { cartRoute } = require("./src/routes/cartRoute");
 
 const MONGODB_URI = process.env.MONGODB_URI;
 const PORT = process.env.PORT;
@@ -47,3 +48,4 @@ app.get("/", (req, res) => res.json({ message: "done" }));
 app.use("/auth", userRoute);
 app.use("/api", restaurants);
 app.use("/profile", profileRoute);
+app.use("/cart", cartRoute);
