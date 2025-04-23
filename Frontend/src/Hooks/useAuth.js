@@ -50,7 +50,9 @@ export const useAuth = () => {
         isSignup && setIsSignup(false);
       !isSignup && navigate("/");
     } catch (err) {
-      console.log(err.message);
+      console.log(err.response.data.message);
+      toast.error(err.response?.data?.message || "Internal server error")
+
     } finally {
       setLoader(false);
     }

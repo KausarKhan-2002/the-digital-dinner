@@ -100,6 +100,9 @@ exports.login = async (req, res) => {
       throw new Error("Incorrect password. Please try again.");
     }
 
+    console.log("chl rha");
+    
+
     // 3. Create token and save cookie
     createTokenSaveCookie(user._id, res);
 

@@ -7,31 +7,36 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-
     replaceItem: (state, action) => {
-      return action.payload
+      return action.payload;
     },
 
     // Add new item or increase quantity if already in cart
     addItem: (state, action) => {
       const item = action.payload;
       if (!state) {
-        state = []
-        state.push(item)
-        return
+        state = [];
+        state.push(item);
+        toast.success("Added in cart");
+        return;
       }
       const cartItem = state.find((i) => i.id === item.id);
       if (cartItem) {
         toast.error(`Already in cart`);
       } else {
         state.push(item);
-        toast.success(`Added in cart`)
+        toast.success(`Added in cart`);
       }
     },
 
     // Remove item from cart
     removeItem: (state, action) => {
-      return state.filter((item) => item.id !== action.payload.id);
+      const filterItem = state.filter(
+        (item) => item.id !== action.payload.productId
+      );
+
+      if (filterItem.length === 0) return null;
+      else return filterItem;
     },
 
     // Increase item quantity
@@ -54,12 +59,18 @@ const cartSlice = createSlice({
 
     // Clear entire cart
     clearCart: () => {
-      return [];
+      return null;
     },
   },
 });
 
-export const { replaceItem, addItem, removeItem, incrementQty, decrementQty, clearCart } =
-  cartSlice.actions;
+export const {
+  replaceItem,
+  addItem,
+  removeItem,
+  incrementQty,
+  decrementQty,
+  clearCart,
+} = cartSlice.actions;
 
 export default cartSlice.reducer;

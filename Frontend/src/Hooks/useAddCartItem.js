@@ -13,7 +13,7 @@ export const useAddCartItem = () => {
     }
 
     try {
-      console.log(item);
+      // console.log(item);
 
       await axios.post(BASE_URL + `/cart/add`, item, {
         withCredentials: true,

@@ -6,36 +6,25 @@ const productSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
-  brand: {
-    brandName: {
-      type: String,
-      required: true,
-    },
-    brandImageId: {
-      type: String,
-      required: true,
-    },
-  },
   name: {
     type: String,
-    required: true,
-    trim: true,
+    default: undefined
   },
   price: {
     type: Number,
-    required: true,
+    default: undefined
   },
   description: {
     type: String,
-    required: true,
+    default: undefined
   },
   imageId: {
     type: String,
-    required: true,
+    default: undefined
   },
   quantity: {
     type: Number,
-    required: true,
+    default: undefined
   },
   ratings: {
     rating: {

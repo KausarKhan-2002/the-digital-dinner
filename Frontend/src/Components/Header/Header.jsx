@@ -1,10 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DesktopNavbar from "./DesktopNavbar";
 import { FaBarsStaggered } from "react-icons/fa6";
 import MobileNavbar from "./MobileNavbar";
+import { useCartItem } from "../../Hooks/useCartItem";
 
 function Header() {
+
   const [showMobileNavbar, setShowMobileNavbar] = useState(false);
+
+  const cartItem = useCartItem();
+  useEffect(() => {
+    cartItem()
+  } ,[])
+
   return (
     <header className="fixed w-full bg-white z-999 flex justify-between items-center px-14 md:px-17 lg:px-25 xl:px-32 shadow-lg">
       {/* Logo */}

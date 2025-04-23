@@ -1,4 +1,5 @@
 import React from "react";
+import toast from "react-hot-toast";
 
 function Checkout({ totalAmount }) {
   return (
@@ -22,7 +23,9 @@ function Checkout({ totalAmount }) {
           <span>₹{totalAmount + Math.floor(totalAmount * 0.05)}</span>
         </div>
       </div>
-      <button className="mt-6 w-full bg-orange-500 text-white py-3 rounded-xl hover:bg-orange-600 transition-all text-lg font-medium shadow-md">
+      <button onClick={() => {
+        toast.error("This section is under maintenance")
+      }} className="mt-6 w-full bg-orange-500 text-white py-3 opacity-60 cursor-no-drop rounded-xl hover:bg-orange-600 transition-all text-lg font-medium shadow-md">
         Proceed to Checkout
       </button>
       <p className="mt-3 text-sm text-gray-500 text-center">

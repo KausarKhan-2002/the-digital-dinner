@@ -4,8 +4,6 @@ import { useCollectionParamId } from "./useCollectionParamId";
 
 export const useCollections = () => {
   const { resId, resTitle } = useCollectionParamId();
-  console.log(resId, resTitle);
-  
 
   return async (setCollection) => {
     try {

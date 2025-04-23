@@ -9,14 +9,14 @@ function Home() {
   const [resData, setResData] = useState([]);
   const homeRestaurant = useHomeRestaurant();
 
-  const resCard =
-    resData[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
-
   useEffect(() => {
     homeRestaurant(setResData);
   }, []);
 
   if (resData.length === 0) return <LandingShimmerUI />;
+
+  const resCard =
+    resData[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
 
   const mindResSettings = {
     border: false,
@@ -25,6 +25,7 @@ function Home() {
     infinite: false,
     slideToShow: 8,
     cardInfo: false,
+    swipeToSlide: false,
     responsive: [
       {
         breakpoint: 1280,
@@ -41,17 +42,13 @@ function Home() {
       {
         breakpoint: 768,
         settings: {
-          slideToShow: 4,
+          slideToShow: 3.4,
+          swipeToSlide: true,
+          arrows: false,
+          dots: false,
         },
       },
-      {
-        breakpoint: 640,
-        settings: {
-          slideToShow: 3,
-          dots: false
-        },
-      },
-    ]
+    ],
   };
 
   const topResSettings = {
@@ -61,6 +58,7 @@ function Home() {
     infinite: true,
     slideToShow: 6,
     cardInfo: true,
+    swipeToSlide: false,
     responsive: [
       {
         breakpoint: 1280,
@@ -77,14 +75,10 @@ function Home() {
       {
         breakpoint: 768,
         settings: {
-          slideToShow: 3,
-        },
-      },
-      {
-        breakpoint: 640,
-        settings: {
-          slideToShow: 2,
-          dots: false
+          slideToShow: 2.1,
+          swipeToSlide: true,
+          arrows: false,
+          dots: false,
         },
       },
     ],
@@ -109,11 +103,12 @@ function Home() {
           <div className="w-[30%] h-[2px] bg-slate-600 my-3" />
         </h1>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-5 gap-y-11 mt-3">
-          {resCard.map((item) => (
-            <Link key={item?.info?.id} to={`/restaurant/${item.info.id}`}>
-              <RestaurantCard cardData={item} />
-            </Link>
-          ))}
+          {resCard &&
+            resCard.map((item) => (
+              <Link key={item?.info?.id} to={`/restaurant/${item.info.id}`}>
+                <RestaurantCard cardData={item} />
+              </Link>
+            ))}
         </div>
       </div>
     </section>

@@ -18,6 +18,7 @@ const SuggestionCards = ({ cardId }) => {
 
   const restaurant = data[1].groupedCard.cardGroupMap.RESTAURANT;
   const dish = data[1].groupedCard.cardGroupMap.DISH;
+  
 
   return (
     <div className="">

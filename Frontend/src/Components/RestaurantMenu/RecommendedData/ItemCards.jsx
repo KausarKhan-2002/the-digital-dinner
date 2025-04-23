@@ -3,8 +3,12 @@ import { FaStar } from "react-icons/fa";
 import React from "react";
 import { BsTriangleFill } from "react-icons/bs";
 import { FaCircle } from "react-icons/fa6";
+import { useAddCartItem } from "../../../Hooks/useAddCartItem";
+import { useDispatch, useSelector } from "react-redux";
+import { addItem } from "../../../Store/cartSlice";
+import toast from "react-hot-toast";
 
-const ItemCards = ({ item, brandInfo, handleCart }) => {
+const ItemCards = ({ item }) => {
   const {
     id,
     name,
@@ -16,6 +20,22 @@ const ItemCards = ({ item, brandInfo, handleCart }) => {
     isVeg,
     isBestseller,
   } = item?.card?.info;
+
+  const dispatch = useDispatch();
+  const addCartItem = useAddCartItem();
+  const user = useSelector(store => store.user)
+
+  const handleCart = (item) => {
+    // console.log(item);
+
+    if (user?._id) {
+      dispatch(addItem(item));
+      addCartItem(item);
+    } else {
+      toast.error("Please login");
+    }
+  };
+  
 
   return (
     <div className="flex flex-col-reverse xl:flex-row justify-between items-start sm:items-center shadow-sm overflow-hidden xl:px-1 gap-6 border-b border-gray-200 pb-10 pt-6">
@@ -79,7 +99,6 @@ const ItemCards = ({ item, brandInfo, handleCart }) => {
             handleCart({
               id,
               imageId,
-              brand: brandInfo,
               quantity: 1,
               name,
               price: price || defaultPrice,
@@ -88,8 +107,6 @@ const ItemCards = ({ item, brandInfo, handleCart }) => {
                 ratingCount: ratings?.aggregatedRating?.ratingCountV2,
               },
               description,
-              isVeg,
-              isBestseller,
             })
           }
           className="absolute bottom-[-14px] left-1/2 -translate-x-1/2 bg-white  text-green-700 font-bold text-sm py-2 px-6 rounded-md shadow transition-all duration-200"

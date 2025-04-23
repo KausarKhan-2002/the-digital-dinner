@@ -34,7 +34,7 @@ function RestaurantTopCarousel({ data, dataSettings, isCategories }) {
         breakpoint: bp.breakpoint,
         settings: {
           slidesToShow: bp.settings.slideToShow,
-          slidesToScroll: 1,
+          swipeToSlide: bp.settings.swipeToSlide,
           dots: bp.settings.dots
         },
       })) || [],
@@ -54,7 +54,7 @@ function RestaurantTopCarousel({ data, dataSettings, isCategories }) {
           <button
             onClick={() => sliderRef.current?.slickPrev()}
             disabled={isFirstSlide}
-            className={`p-2 rounded-full transition cursor-pointer ${
+            className={`hidden md:inline-block p-2 rounded-full transition cursor-pointer ${
               isFirstSlide
                 ? "bg-slate-200 text-slate-400 cursor-not-allowed"
                 : "bg-slate-300 text-slate-800 hover:bg-slate-400"
@@ -65,7 +65,7 @@ function RestaurantTopCarousel({ data, dataSettings, isCategories }) {
           <button
             onClick={() => sliderRef.current?.slickNext()}
             disabled={isLastSlide}
-            className={`p-2 rounded-full transition cursor-pointer ${
+            className={`hidden md:inline-block p-2 rounded-full transition cursor-pointer ${
               isLastSlide
                 ? "bg-slate-200 text-slate-400 cursor-not-allowed"
                 : "bg-slate-300 text-slate-800 hover:bg-slate-400"
@@ -77,7 +77,7 @@ function RestaurantTopCarousel({ data, dataSettings, isCategories }) {
       </div>
 
       <Slider
-        className="z-0 [&_.slick-list]:z-0 [&_.slick-track]:z-0 [&_.slick-slide]:z-0"
+        className={`${isCategories && "rounded-full"} overflow-hidden z-0 [&_.slick-list]:z-0 [&_.slick-track]:z-0 [&_.slick-slide]:z-0`}
         ref={sliderRef}
         {...settings}
       >

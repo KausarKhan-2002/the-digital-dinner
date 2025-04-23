@@ -5,9 +5,13 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import { FaIndianRupeeSign } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { SEARCH_DISH_IMG_URL } from "../../Utils/constants";
+import { HOME_IMG_URL } from "../../Utils/constants";
+import { useDispatch, useSelector } from "react-redux";
+import { addItem } from "../../Store/cartSlice";
+import { useAddCartItem } from "../../Hooks/useAddCartItem";
+import toast from "react-hot-toast";
 
 const DishCards = ({ item }) => {
-
   const { name: infoName, price } = item.card.card.info;
   const {
     name: resName,
@@ -16,6 +20,20 @@ const DishCards = ({ item }) => {
     cloudinaryImageId,
     id,
   } = item.card.card.restaurant.info;
+
+  const dispatch = useDispatch();
+  const addCartItem = useAddCartItem();
+  const user = useSelector((store) => store.user);
+
+  const handleCart = (item) => {
+
+    if (user?._id) {
+      dispatch(addItem(item));
+      addCartItem(item);
+    } else {
+      toast.error("Please login");
+    }
+  };
 
   return (
     <div className="bg-white px-4 pt-5 pb-10 rounded-3xl">
@@ -53,10 +71,35 @@ const DishCards = ({ item }) => {
         <div className="relative">
           <img
             className="w-[150px] h-[150px] object-cover rounded-2xl"
-            src={SEARCH_DISH_IMG_URL + cloudinaryImageId}
+            src={HOME_IMG_URL + cloudinaryImageId}
           />
 
-          <button className="absolute bottom-[-15px] left-[11%] text-green-600 font-extrabold bg-white shadow-md px-10 py-2 rounded-lg hover:bg-slate-200 transition-all">
+          <button
+            onClick={() => {
+              const {
+                id,
+                name,
+                price,
+                defaultPrice,
+                description,
+                imageId,
+                ratings,
+              } = item.card.card.info;
+              handleCart({
+                id,
+                imageId,
+                quantity: 1,
+                name,
+                price: price || defaultPrice,
+                ratings: {
+                  rating: ratings?.aggregatedRating?.rating,
+                  ratingCount: ratings?.aggregatedRating?.ratingCountV2,
+                },
+                description,
+              });
+            }}
+            className="absolute bottom-[-15px] left-[11%] text-green-600 font-extrabold bg-white shadow-md px-10 py-2 rounded-lg hover:bg-slate-200 transition-all"
+          >
             ADD
           </button>
         </div>
@@ -66,7 +109,7 @@ const DishCards = ({ item }) => {
 };
 
 const SuggestionDishCards = ({ itemCards }) => {
-  const cards = itemCards.cards.slice(1);
+  const cards = itemCards?.cards?.slice(1);
 
   return (
     <div>

@@ -19,17 +19,7 @@ const RecommendedItemCards = ({ items, state, brandInfo }) => {
     }
   };
 
-  const addCartItem = useAddCartItem();
-  const handleCart = (item) => {
-    // console.log(item);
 
-    if (user?._id) {
-      dispatch(addItem(item));
-      addCartItem(item);
-    } else {
-      toast.error("Please login");
-    }
-  };
 
   return (
     <div>
@@ -56,7 +46,6 @@ const RecommendedItemCards = ({ items, state, brandInfo }) => {
             key={ind}
             brandInfo={brandInfo}
             item={item}
-            handleCart={handleCart}
           />
         ))}
       </div>

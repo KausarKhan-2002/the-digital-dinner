@@ -6,11 +6,37 @@ import {
 } from "react-icons/io5"; // Importing icons
 import { IoMdClose } from "react-icons/io";
 import { DEFAULT_AVATAR } from "../../Utils/constants";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useLogout } from "../../Hooks/useLogout";
 
 function MobileNavbar({ showMobileNavbar, setShowMobileNavbar }) {
-  const {pathname} = useLocation()
+  const user = useSelector((store) => store.user);
+  const cartItems = useSelector((store) => store.cart);
+
+  const itemsLength = cartItems ? cartItems.length : 0;
   
+  const { pathname } = useLocation();
+  const [registerBtn, setRegisterBtn] = useState("");
+
+  const navigate = useNavigate();
+  const logout = useLogout();
+
+  const handleLogout = () => {
+    
+    if (registerBtn === "logout") {
+      logout(setShowMobileNavbar);
+    } else {
+      navigate("/auth");
+      setShowMobileNavbar(false)
+    }
+  };
+
+  useEffect(() => {
+    setRegisterBtn(user ? "logout" : "SignIn");
+  }, [user]);
+
   return (
     <section
       id="mobileNavbar"
@@ -24,7 +50,7 @@ function MobileNavbar({ showMobileNavbar, setShowMobileNavbar }) {
       }`}
     >
       <div
-        className={`fixed top-0 right-0 w-[250px] h-full bg-slate-100/70 backdrop-blur-md  z-[999999] transition-transform duration-300 ease-in-out shadow-lg ${
+        className={`fixed top-0 right-0 w-[250px] h-full bg-slate-100/85 backdrop-blur-md  z-[999999] transition-transform duration-300 ease-in-out shadow-lg ${
           showMobileNavbar ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -45,31 +71,43 @@ function MobileNavbar({ showMobileNavbar, setShowMobileNavbar }) {
           <Link
             to="/"
             onClick={() => setShowMobileNavbar(false)}
-            className={`py-2 font-medium flex items-center ${pathname === "/" && "text-orange-700"}`}
+            className={`py-2 font-medium flex items-center ${
+              pathname === "/" && "text-orange-700"
+            }`}
           >
             <IoHomeOutline className="mr-3 text-xl" /> Home
           </Link>
           <Link
             to="/search"
             onClick={() => setShowMobileNavbar(false)}
-            className={`py-2 font-medium flex items-center ${pathname === "/search" && "text-orange-700"}`}
+            className={`py-2 font-medium flex items-center ${
+              pathname === "/search" && "text-orange-700"
+            }`}
           >
             <IoSearchOutline className="mr-3 text-xl" /> Search
           </Link>
           <Link
             to="/cart"
             onClick={() => setShowMobileNavbar(false)}
-            className={`py-2 font-medium flex items-center ${pathname === "/cart" && "text-orange-700"}`}
+            className={`relative py-2 font-medium flex items-center ${
+              pathname === "/cart" && "text-orange-700"
+            }`}
           >
+           {itemsLength > 0 && (
+            <span className="absolute top-1 right-29 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full shadow">
+              {itemsLength}
+            </span>
+          )}
             <IoCartOutline className="mr-3 text-xl" /> Cart
           </Link>
-          <Link
-            to="/auth"
-            onClick={() => setShowMobileNavbar(false)}
-            className={`py-2 font-medium flex items-center ${pathname === "/auth" && "text-orange-700"}`}
+          <button
+            onClick={handleLogout}
+            className={`py-2 font-medium flex items-center ${
+              pathname === "/auth" && "text-orange-700"
+            }`}
           >
-            <IoLogInOutline className="mr-3 text-xl" /> Sign In
-          </Link>
+            <IoLogInOutline className="mr-3 text-xl" /> {registerBtn}
+          </button>
         </nav>
       </div>
     </section>

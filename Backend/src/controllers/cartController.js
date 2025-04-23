@@ -81,7 +81,7 @@ exports.getItem = async (req, res) => {
 exports.updateQuantity = async (req, res) => {
   try {
     const userId = req.user.id;
-    const {productId, quantity, type } = req.body;
+    const { productId, quantity, type } = req.body;
 
     if (!quantity || typeof quantity !== "number" || quantity < 1) {
       return res
@@ -110,6 +110,49 @@ exports.updateQuantity = async (req, res) => {
     res
       .status(200)
       .json({ success: true, message: "Quantity updated successfully" });
+  } catch (err) {
+    catchError(err, res);
+  }
+};
+
+exports.deleteItem = async (req, res) => {
+  try {
+    const user = req.user;
+    const { productId } = req.body;
+    console.log("productId:", productId);
+    console.log("user:", user);
+    
+
+    // 1. Validate productId
+    if (!productId) {
+      throw new Error("Product ID is required to remove an item from the cart.");
+    }
+
+    // 2. Find the cart for the logged-in user
+    const cartUser = await Cart.findOne({userId: user._id});
+
+    // 3. If cart not found
+    if (!cartUser) {
+      throw new Error("Cart not found. Please login or create a cart.");
+    }
+
+    // 4. Check if the product exists in cart
+    const isProductExist = cartUser.productsId.some((p) => p.id == productId);
+    if (!isProductExist) {
+      throw new Error("Product not found in cart.");
+    }
+
+    // 5. Filter out the product to delete
+    cartUser.productsId = cartUser.productsId.filter((p) => p.id != productId);
+
+    // 6. Save the updated cart
+    await cartUser.save();
+
+    // 7. Send response
+    res.status(200).json({
+      success: true,
+      message: "Product successfully removed from cart.",
+    });
   } catch (err) {
     catchError(err, res);
   }

@@ -1,77 +1,60 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { IoStar } from "react-icons/io5";
-import { SEARCH_IMG_URL } from "../../Utils/constants";
+import { HOME_IMG_URL, SEARCH_IMG_URL } from "../../Utils/constants";
 
 const SuggestionResCards = ({ itemCards }) => {
-  // console.log(itemCards.cards);
-
   return (
-    <div>
-      <div className="grid grid-cols-2 gap-x-8 gap-y-10">
-        {itemCards.cards &&
-          itemCards.cards.map((item, index) => (
-            <Link
-              to={
-                item.card.card.info && `/restaurant/${item.card.card.info.id}`
-              }
-              key={item.card.card.info?.id || index}
-            >
-              {item.card.card.info && (
-                <div className="flex items-center gap-3 relative bg-white px-5 py-6">
-                  <div>
+    <div className="px-4 py-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {itemCards?.cards &&
+          itemCards?.cards.map((item, index) => {
+            const info = item.card.card.info;
+            return (
+              info && (
+                <Link
+                  to={`/restaurant/${info.id}`}
+                  key={info.id || index}
+                  className="bg-white rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 p-4 relative"
+                >
+                  <div className="relative">
                     <img
-                      className="w-24 rounded-md"
-                      src={
-                        SEARCH_IMG_URL + item.card.card.info.cloudinaryImageId
-                      }
+                      className="w-full h-40 object-cover rounded-xl"
+                      src={HOME_IMG_URL + info.cloudinaryImageId}
+                      alt={info.name}
                     />
-
-                    {item.card.card.info.aggregatedDiscountInfoV3 && (
-                      <h3 className="flex flex-col text-center text-xs bg-white absolute left-[6.4%] bottom-[10px] w-[85px] py-1 rounded-md leading-tight shadow-md text-red-500 font-bold">
-                        <span>
-                          {item.card.card.info.aggregatedDiscountInfoV3.header}
-                        </span>
-                        <span className="text-[.5rem]">
-                          {
-                            item.card.card.info.aggregatedDiscountInfoV3
-                              .subHeader
-                          }
-                        </span>
-                      </h3>
+                    {info.aggregatedDiscountInfoV3 && (
+                      <div className="absolute bottom-2 left-2 bg-white text-red-500 text-xs font-bold px-2 py-1 rounded-md shadow">
+                        <span>{info.aggregatedDiscountInfoV3.header}</span>
+                        <div className="text-[0.5rem] font-medium">
+                          {info.aggregatedDiscountInfoV3.subHeader}
+                        </div>
+                      </div>
                     )}
-
-                    {/* {console.log(item.card.card.info.aggregatedDiscountInfoV3)} */}
                   </div>
 
-                  <div className="flex flex-col gap-1">
-                    <h2 className="text-[.9rem] font-bold text-slate-700">
-                      {item.card.card.info.name.length > 30
-                        ? item.card.card.info.name
-                            .split("")
-                            .slice(0, 30)
-                            .join("") + "..."
-                        : item.card.card.info.name}
+                  <div className="mt-4 space-y-1">
+                    <h2 className="text-sm font-semibold text-slate-800 truncate">
+                      {info.name}
                     </h2>
-                    <p className="flex gap-4 text-[.8rem] font-semibold text-slate-600">
+
+                    <div className="flex items-center text-xs font-medium text-slate-600 gap-3">
                       <span className="flex items-center gap-1">
-                        <IoStar /> {item.card.card.info.avgRating}
+                        <IoStar className="text-yellow-500" />
+                        {info.avgRating}
                       </span>
-                      <span>{item.card.card.info.sla.slaString}</span>
-                      <span className="flex items-center">
-                        {item.card.card.info.costForTwoMessage}
-                      </span>
-                    </p>
-                    <p className="text-[.8rem] font-base text-slate-500">
-                      {item.card.card.info.cuisines.length > 4
-                        ? item.card.card.info.cuisines.slice(0, 5).join(", ")
-                        : item.card.card.info.cuisines.join(", ")}
+                      <span>{info.sla.slaString}</span>
+                      <span>{info.costForTwoMessage}</span>
+                    </div>
+
+                    <p className="text-xs text-slate-500">
+                      {info.cuisines.slice(0, 4).join(", ")}
                     </p>
                   </div>
-                </div>
-              )}
-            </Link>
-          ))}
+                </Link>
+              )
+            );
+          })}
       </div>
     </div>
   );

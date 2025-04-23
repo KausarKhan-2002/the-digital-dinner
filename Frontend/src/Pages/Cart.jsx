@@ -6,19 +6,18 @@ import CartEmpty from "../Components/Cart/CartEmpty";
 import CartItem from "../Components/Cart/CartItem";
 import Checkout from "../Components/Cart/Checkout";
 import QuantityPayload from "../Components/Cart/QuantityPayload";
+import CartShimmerUI from "../Components/ShimmerUI/CartShimmerUI";
 
 const Cart = () => {
   const cartItems = useSelector((store) => store.cart);
   const [totalAmount, setTotalAmount] = useState(0);
   const updateQuantity = useUpdateQuantity();
   const [isUpdate, setIsUpdate] = useState(false);
-
+  // console.log(cartItems, cartItems?.length);
+  
+  
   const handleQtyChange = (id, type) => {
     updateQuantity(id, type, setIsUpdate);
-  };
-
-  const handleDelete = (id) => {
-    console.log("Delete item", id);
   };
 
   const getTotalAmount = (cartItems) => {
@@ -36,13 +35,10 @@ const Cart = () => {
     }
   }, [cartItems]);
 
-  const cartItem = useCartItem();
-  useEffect(() => {
-    cartItem();
-  }, []);
-
+  // console.log("cartItems:",cartItems);
+  
   if (!cartItems) return <CartEmpty />;
-  if (cartItems?.length === 0) return "Loading...";
+  if (cartItems?.length === 0) return <CartShimmerUI />;
 
   return (
     <div className="min-h-[90vh] bg-white text-gray-800 p-4 md:p-5">
@@ -54,7 +50,6 @@ const Cart = () => {
         <CartItem
           cartItems={cartItems}
           handleQtyChange={handleQtyChange}
-          handleDelete={handleDelete}
         />
 
         {/* Order Summary */}
