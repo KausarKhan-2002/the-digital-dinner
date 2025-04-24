@@ -13,7 +13,8 @@ const RestaurantMenu = () => {
   // console.log(menuInfo);
 
   useEffect(() => {
-    restaurantMenuData(setMenuInfo);
+    const fetch = async () => await restaurantMenuData(setMenuInfo);
+    fetch()
   }, []);
 
   if (menuInfo.length === 0) return <MenuShimmerUI />

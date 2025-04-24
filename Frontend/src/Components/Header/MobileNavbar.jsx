@@ -15,8 +15,11 @@ function MobileNavbar({ showMobileNavbar, setShowMobileNavbar }) {
   const user = useSelector((store) => store.user);
   const cartItems = useSelector((store) => store.cart);
 
-  const itemsLength = cartItems ? cartItems.length : 0;
-  
+  let itemsLength = cartItems?.items ? cartItems?.items?.length : 0;
+  if (cartItems && !cartItems.authorized) {
+    itemsLength = 0;
+  }
+
   const { pathname } = useLocation();
   const [registerBtn, setRegisterBtn] = useState("");
 
@@ -24,12 +27,11 @@ function MobileNavbar({ showMobileNavbar, setShowMobileNavbar }) {
   const logout = useLogout();
 
   const handleLogout = () => {
-    
     if (registerBtn === "logout") {
       logout(setShowMobileNavbar);
     } else {
       navigate("/auth");
-      setShowMobileNavbar(false)
+      setShowMobileNavbar(false);
     }
   };
 
@@ -43,6 +45,7 @@ function MobileNavbar({ showMobileNavbar, setShowMobileNavbar }) {
       onClick={(e) =>
         e.target.id === "mobileNavbar" && setShowMobileNavbar(false)
       }
+      // sm:hidden fixed top-0 left-0 w-full h-screen bg-black/60 z-[99999] transition-opacity duration-300
       className={`sm:hidden fixed top-0 left-0 w-full h-screen bg-black/60 z-[99999] transition-opacity duration-300 ${
         showMobileNavbar
           ? "opacity-100 pointer-events-auto"
@@ -93,11 +96,11 @@ function MobileNavbar({ showMobileNavbar, setShowMobileNavbar }) {
               pathname === "/cart" && "text-orange-700"
             }`}
           >
-           {itemsLength > 0 && (
-            <span className="absolute top-1 right-29 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full shadow">
-              {itemsLength}
-            </span>
-          )}
+            {itemsLength > 0 && (
+              <span className="absolute top-1 right-29 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full shadow">
+                {itemsLength}
+              </span>
+            )}
             <IoCartOutline className="mr-3 text-xl" /> Cart
           </Link>
           <button
