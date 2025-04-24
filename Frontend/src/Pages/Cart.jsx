@@ -21,8 +21,9 @@ const Cart = () => {
 
   const getTotalAmount = (cartItems) => {
     let total = 0;
-    if (cartItems?.items) {
-      for (let item of cartItems.items) {
+
+    if (cartItems) {
+      for (let item of cartItems) {
         const calc = Math.floor(item.price / 100) * item.quantity;
         total += calc;
       }
@@ -31,8 +32,8 @@ const Cart = () => {
   };
 
   useEffect(() => {
-    if (cartItems) {
-      setTotalAmount(getTotalAmount(cartItems.items));
+    if (cartItems.items) {
+      setTotalAmount(getTotalAmount(cartItems?.items));
     }
   }, [cartItems.items]);
 
@@ -40,12 +41,10 @@ const Cart = () => {
 
   if (cartItems.authorized && cartItems?.items?.length === 0) {
     return <CartShimmerUI />;
-  }
-  else if (!cartItems.authorized) {
-    return <CartDenied />
-  }
-  else if(cartItems?.authorized && !cartItems?.items) {
-    return <CartEmpty />
+  } else if (!cartItems.authorized) {
+    return <CartDenied />;
+  } else if (cartItems?.authorized && !cartItems?.items) {
+    return <CartEmpty />;
   }
 
   return (
