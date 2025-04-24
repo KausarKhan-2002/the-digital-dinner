@@ -1,7 +1,6 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const CartEmpty = () => {
+const CartDenied = () => {
   const homeNav = useNavigate();
 
   return (
@@ -11,19 +10,19 @@ const CartEmpty = () => {
           className="w-44"
           src="https://img.freepik.com/premium-vector/top-view-food-white-background_1639-36388.jpg"
         />
-        <h2 className="text-lg font-bold text-slate-600">Your cart is empty</h2>
+        <h2 className="text-lg font-bold text-slate-600">Access Restricted</h2>
         <p className="text-slate-400">
-          You can go to home page to view more restaurants
+        “Oops! You need to be logged in to see your cart. Signing in lets you keep track of items
         </p>
         <button
-          onClick={() => homeNav("/")}
+          onClick={() => homeNav("/auth")}
           className="bg-orange-600 font-bold text-white py-2 px-5 mt-5 hover:shadow-lg transition"
         >
-          SEE RESTAURANTS NEAR YOU
+          Please Login
         </button>
       </div>
     </div>
   );
 };
 
-export default CartEmpty;
+export default CartDenied;

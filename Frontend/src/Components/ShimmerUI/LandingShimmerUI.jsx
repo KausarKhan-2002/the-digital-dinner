@@ -3,7 +3,7 @@ import { TbFidgetSpinner } from "react-icons/tb";
 
 const LandingShimmerUI = () => {
   return (
-    <div className="">
+    <div className="overflow-hidden fixed w-full left-0">
       <div className="bg-slate-900 flex flex-col gap-2 justify-center items-center h-[350px]">
         <Spinner icon={TbFidgetSpinner} size="text-4xl" />
 

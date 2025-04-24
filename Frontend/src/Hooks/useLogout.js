@@ -3,6 +3,7 @@ import { BASE_URL } from "../Utils/constants";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { removeUser } from "../Store/userSlice";
+import { authDeny } from "../Store/cartSlice";
 
 export const useLogout = () => {
   const dispatch = useDispatch();
@@ -14,8 +15,8 @@ export const useLogout = () => {
         { withCredentials: true }
       );
       console.log("logout");
-      
-      dispatch(removeUser());
+      dispatch(removeUser())
+      dispatch(authDeny());
       toast.success("You have been logged out");
       setShowMobileNavbar && setShowMobileNavbar(false);
     } catch (err) {

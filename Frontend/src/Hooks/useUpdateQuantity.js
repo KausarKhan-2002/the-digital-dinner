@@ -11,7 +11,7 @@ export const useUpdateQuantity = () => {
   return async (productId, type, setIsUpdate) => {
     try {
       setIsUpdate(true);
-      const item = cartItems.find((p) => p.id === productId);
+      const item = cartItems.items.find((p) => p.id === productId);
       if (!item) return;
 
       const response = await axios.put(

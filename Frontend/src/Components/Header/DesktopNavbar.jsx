@@ -9,7 +9,10 @@ function DesktopNavbar() {
   const [registerBtn, setRegisterBtn] = useState("");
   const {pathname} = useLocation()
 
-  const itemsLength = cartItems ? cartItems.length : 0;
+  let itemsLength = cartItems?.items ? cartItems?.items?.length : 0;
+  if (cartItems && !cartItems.authorized) {
+    itemsLength = 0
+  }
 
   const logout = useLogout();
   const navigate = useNavigate();
