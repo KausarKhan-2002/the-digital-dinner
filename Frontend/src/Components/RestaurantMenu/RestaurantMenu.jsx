@@ -13,11 +13,10 @@ const RestaurantMenu = () => {
   // console.log(menuInfo);
 
   useEffect(() => {
-    const fetch = async () => await restaurantMenuData(setMenuInfo);
-    fetch()
+    restaurantMenuData(setMenuInfo);
   }, []);
 
-  if (menuInfo.length === 0) return <MenuShimmerUI />
+  if (menuInfo.length === 0) return <MenuShimmerUI />;
 
   // console.log(menuInfo.cards[2]?.card?.card?.info.cloudinaryImageId);
 
