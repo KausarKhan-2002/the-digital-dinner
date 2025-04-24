@@ -1,7 +1,7 @@
 export const DEFAULT_AVATAR =
   "https://icons.veryicon.com/png/o/miscellaneous/rookie-official-icon-gallery/225-default-avatar.png";
 
-const origin = false;
+const origin = true;
 export const BASE_URL = origin
   ? "https://the-digital-dinner-server.onrender.com"
   : "http://localhost:8090";
