@@ -3,7 +3,7 @@ export const DEFAULT_AVATAR =
 
 
   
-const origin = false;
+const origin = true;
 export const BASE_URL = origin
   ? "https://the-digital-dinner-server.onrender.com"
   : "http://localhost:8090";
