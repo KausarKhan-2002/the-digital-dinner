@@ -13,14 +13,16 @@ exports.createTokenSaveCookie = (userId, res) => {
   const isProd = process.env.NODE_ENV === "production";
 
   res.cookie("jwt_token", token, {
-    httpOnly: process.env.COOKIE_HTTPONLY === "true", // JS can’t access the cookie
-    secure: isProd && process.env.COOKIE_SECURE === "true", // it should be true in production to http
-    sameSite:
-      process.env.COOKIE_SAMESITE === "Lax"
-        ? "Lax"
-        : process.env.COOKIE_SAMESITE === "Strict"
-        ? "Strict"
-        : "Lax",
+    httpOnly: true, // JS can’t access the cookie
+    secure: isProd, // it should be true in production to http
+    sameSite: isProd ? "None" : "Lax",
     maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days in milliseconds
   });
 };
+
+
+// //  process.env.COOKIE_SAMESITE === "Lax"
+// ? "Lax"
+//         : process.env.COOKIE_SAMESITE === "Strict"
+//         ? "Strict"
+//         : "Lax",
