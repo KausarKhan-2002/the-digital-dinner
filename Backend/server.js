@@ -6,20 +6,22 @@ const mongoose = require("mongoose");
 const { restaurants } = require("./src/routes/restaurantRoutes");
 const { profileRoute } = require("./src/routes/profileRoute");
 const { cartRoute } = require("./src/routes/cartRoute");
+const app = express();
 
 const MONGODB_URI = process.env.MONGODB_URI;
 const PORT = process.env.PORT;
 
-const app = express();
+// const allowedOrigins = ["https://the-digital-dinner.onrender.com" ,"http://localhost:5173"]
+
 app.use(
   cors({
-    origin: [
-      "https://the-digital-dinner.onrender.com/",
-      "http://localhost:5173",
-    ],
+    origin: "https://the-digital-dinner.onrender.com",
+    methods: ["POST", "GET", "PUT", "DELETE"],
     credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"]
   })
 );
+
 app.use(express.json());
 app.use(cookieParser());
 
