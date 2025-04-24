@@ -11,14 +11,23 @@ const app = express();
 const MONGODB_URI = process.env.MONGODB_URI;
 const PORT = process.env.PORT;
 
-// const allowedOrigins = ["https://the-digital-dinner.onrender.com" ,"http://localhost:5173"]
+const allowedOrigins = [
+  "https://the-digital-dinner.onrender.com",
+  "http://localhost:5173",
+  "https://the-digital-dinner-6ypp.vercel.app"
+];
 
 app.use(
   cors({
-    origin: "https://the-digital-dinner.onrender.com",
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+      callback(new Error("not allowed by CORS"));
+    },
     methods: ["POST", "GET", "PUT", "DELETE"],
     credentials: true,
-    allowedHeaders: ["Content-Type", "Authorization"]
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
