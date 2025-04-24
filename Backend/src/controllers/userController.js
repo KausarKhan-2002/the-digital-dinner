@@ -3,6 +3,7 @@ const { catchError } = require("../helper/catchError");
 const User = require("../models/userModel");
 const bcrypt = require("bcrypt");
 const validator = require("validator");
+require("dotenv").config();
 
 exports.signup = async (req, res) => {
   try {
@@ -101,7 +102,6 @@ exports.login = async (req, res) => {
     }
 
     console.log("chl rha");
-    
 
     // 3. Create token and save cookie
     createTokenSaveCookie(user._id, res);
@@ -127,9 +127,10 @@ exports.login = async (req, res) => {
 exports.logout = async (req, res) => {
   try {
     // 1. Clear the JWT cookie by setting it to an empty value and expiring it immediately
-    res.cookie("jwt_token", "", {
-      httpOnly: true,
-      expires: new Date(0), // Set to past time
+    res.clearCookie("jwt_token", {
+      httpOnly: process.env.COOKIE_HTTPONLY === "true",
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
     });
 
     // 2.Send message
