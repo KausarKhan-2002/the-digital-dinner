@@ -20,6 +20,8 @@ function MobileNavbar({ showMobileNavbar, setShowMobileNavbar }) {
     itemsLength = 0;
   }
 
+  const name = user?.name && user.name[0].toUpperCase() + user.name.slice(1)
+
   const { pathname } = useLocation();
   const [registerBtn, setRegisterBtn] = useState("");
 
@@ -67,8 +69,9 @@ function MobileNavbar({ showMobileNavbar, setShowMobileNavbar }) {
         <img
           src={DEFAULT_AVATAR}
           alt="Profile"
-          className="w-24 h-24 rounded-full mx-auto my-6 border-4 border-slate-700"
+          className="w-24 h-24 rounded-full mx-auto mt-6 border-4 border-slate-700"
         />
+        <p className="text-center mt-1 mb-5 text-sm font-medium">{name}</p>
 
         <nav className="flex flex-col gap-2 px-6">
           <Link

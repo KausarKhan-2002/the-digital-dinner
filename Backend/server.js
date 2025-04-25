@@ -12,8 +12,8 @@ const MONGODB_URI = process.env.MONGODB_URI;
 const PORT = process.env.PORT;
 
 const allowedOrigins = [
+  "http://localhost:5174",
   "https://the-digital-dinner.onrender.com",
-  "http://localhost:5173",
   "https://the-digital-dinner-6ypp.vercel.app",
   "https://digital-dinner.netlify.app"
 ];

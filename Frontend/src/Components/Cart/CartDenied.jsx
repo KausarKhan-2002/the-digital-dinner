@@ -11,7 +11,7 @@ const CartDenied = () => {
           src="https://img.freepik.com/premium-vector/top-view-food-white-background_1639-36388.jpg"
         />
         <h2 className="text-lg font-bold text-slate-600">Access Restricted</h2>
-        <p className="text-slate-400">
+        <p className="text-xs sm:text-sm text-slate-400 text-center">
         “Oops! You need to be logged in to see your cart. Signing in lets you keep track of items
         </p>
         <button
