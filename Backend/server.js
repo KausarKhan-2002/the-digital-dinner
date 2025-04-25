@@ -14,7 +14,8 @@ const PORT = process.env.PORT;
 const allowedOrigins = [
   "https://the-digital-dinner.onrender.com",
   "http://localhost:5173",
-  "https://the-digital-dinner-6ypp.vercel.app"
+  "https://the-digital-dinner-6ypp.vercel.app",
+  "https://digital-dinner.netlify.app"
 ];
 
 app.use(
